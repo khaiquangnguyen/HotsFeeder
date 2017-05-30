@@ -12,7 +12,6 @@ def enumHandler(hwnd, lParam):
             y = rect[1]
             w = rect[2] - x
             h = rect[3] - y
-            print w, h
 
 
 def main():    
@@ -49,7 +48,7 @@ def check_side():
     long_colour = win32gui.GetPixel(i_desktop_window_dc, 490,60)
     i_colour = int(long_colour)
     t = (i_colour & 0xff), ((i_colour >> 8) & 0xff), ((i_colour >> 16) & 0xff)
-    print t
+    win32gui.ReleaseDC(i_desktop_window_id, i_desktop_window_dc)
     if t[1] > 200:
         return "left"
     else:
@@ -65,20 +64,23 @@ def ingame_control(m,k,side):
         k.press_key(k.control_key)
         k.release_key(k.control_key)
         k.tap_key(k.space_key) 
+        time.sleep(0.2)
         m.move(1000,400)
         m.click(1000,400)
-        k.press_key('A')
+        k.press_key('a')
         m.click(1000,400)
-        k.release_key('A')
+        k.release_key('a')
     else:
         k.press_key(k.control_key)
         k.release_key(k.control_key)
         k.tap_key(k.space_key) 
+        time.sleep(0.2)
         m.move(100,400)
         m.click(100,400)
-        k.press_key('A')
+        k.press_key('a')
         m.click(100,400)
-        k.release_key('A')
+        k.release_key('a')
+
 
 
 def is_alive():
